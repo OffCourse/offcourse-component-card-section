@@ -1,7 +1,7 @@
 import React from "react";
 import R from "ramda";
 import classnames from "classnames";
-import CardSectionField from "./CardSectionField.jsx";
+import CardSectionField from "offcourse-component-card-field";
 
 class CardSection extends React.Component {
 

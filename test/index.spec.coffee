@@ -4,7 +4,7 @@ describe "Card Section Component", ->
   beforeAll ->
     moduleUnderTest = "../src/index.jsx"
     mockModules = [
-      "./CardSectionField.jsx"
+      "offcourse-component-card-field"
     ]
     { @Component, @spy } = mockModule moduleUnderTest, mockModules
 
