@@ -1,7 +1,7 @@
 import React from "react";
 import R from "ramda";
 import classnames from "classnames";
-import CardSectionField from "offcourse-component-card-field";
+import CardField from "offcourse-component-card-field";
 
 class CardSection extends React.Component {
 
@@ -19,7 +19,7 @@ class CardSection extends React.Component {
 
   createFields(fields){
     return R.map(([key, value]) => {
-      return <CardSectionField key={ key } title={ key } field={value}/>;
+      return <CardField key={ key } title={ key } field={value}/>;
     }, fields);
   }
 
@@ -34,10 +34,9 @@ class CardSection extends React.Component {
 
   render(){
     const { title, fields } = this.props;
-    const isMany = fields.length > 1;
     return (
       <section className={ this.classes(title) }>
-        { isMany ? this.createFields(fields) : <CardSectionField field={ fields[0] }/> }
+        { this.createFields(fields) }
       </section>
     );
   }

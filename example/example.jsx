@@ -1,22 +1,14 @@
 import React from "react";
-import Card from "../src/index.jsx";
-
-let model = {
-  title: "Bla di Bla",
-  user: "Al Dentist",
-  followers: 3
-};
-
-let schema = ["title", {"meta": ["user", "followers"]}];
+import CardSection from "../src/index.jsx";
 
 class Example extends React.Component {
 
   render() {
+    let title = "title";
+    let fields = [["foo", "bar"], ["baz", "qux"]];
     return (
       <section>
-        <Card model={ model } schema={ schema }>
-          <p>Hello World</p>
-        </Card>
+        <CardSection title={ title } fields={ fields }></CardSection>
       </section>
     );
   }

@@ -1,6 +1,6 @@
 {
   "name": "offcourse-component-card-section",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A react component for the offcourse card section",
   "main": "lib/index.js",
   "scripts": {
@@ -17,7 +17,7 @@
   "dependencies": {
     "classnames": "^2.1.2",
     "lodash": "^3.10.0",
-    "offcourse-component-card-field": "0.0.1",
+    "offcourse-component-card-field": "0.0.2",
     "offcourse-helpers-card-component": "0.0.1",
     "ramda": "^0.15.1",
     "react": "^0.13.3"
