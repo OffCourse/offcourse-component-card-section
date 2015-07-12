@@ -16,8 +16,8 @@ class CardSection extends React.Component {
     }, fields);
   }
 
-  classes(title){
-    title = title.toLowerCase();
+  classes(type){
+    const title = type.toLowerCase();
     const sectionName = `${this.name}-${title}`;
     return classnames({
       [this.name]: true,
@@ -26,13 +26,14 @@ class CardSection extends React.Component {
   }
 
   render(){
-    const { title, fields } = this.props;
+    const { section } = this.props;
+    const { type, fields } = section;
     const sectionBlacklist = ["title", "meta"];
-    const isBlacklisted = R.contains(title, sectionBlacklist);
+    const isBlacklisted = R.contains(type, sectionBlacklist);
 
     return (
-      <section className={ this.classes(title) }>
-        { !isBlacklisted && <h1>{ title }</h1> }
+      <section className={ this.classes(type) }>
+        { !isBlacklisted && <h1>{ type }</h1> }
         { this.createFields(fields) }
       </section>
     );
@@ -40,8 +41,7 @@ class CardSection extends React.Component {
 }
 
 CardSection.propTypes = {
-  title: PropTypes.string.isRequired,
-  fields: PropTypes.array.isRequired
+  section: PropTypes.object.isRequired
 };
 
 export default CardSection;
