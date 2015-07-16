@@ -3,41 +3,49 @@ describe "Card Section Component", ->
 
   beforeAll ->
     moduleUnderTest = "../src/index.jsx"
-    mockModules = [
-      "offcourse-component-card-field"
-    ]
+    mockModules = []
     { @Component, @spy } = mockModule moduleUnderTest, mockModules
 
   afterAll -> disableMocks()
 
-  describe "when title is not important", -> 
+  describe "when title", -> 
     Given -> 
       testdom "<html><body></body></html>"
-      @type = "Bla"
-      @fields = [
-        ["Foo", "Bar"],
-        ["Bar", "Baz"]
-      ]
-      @section = { @type, @fields }
-    When  -> @subject  = renderElement @Component, { @section }
+      @type = "title"
+      @data = "Bla"
+      @section = { @type, @data }
+    When  -> @subject  = renderElement @Component, @section
     Then  -> @classes = @subject.className.split ' '
     And   -> @classes.includes "card_section"
-    And   -> @classes.includes "card_section-bla"
-    And   ->
-        args = { type: @fields[0][0], field: @fields[0][1] }
-        expect(@spy.getCall(0).args[0]).to.deep.equal(args)
-    And   ->
-        args = { type: @fields[1][0], field: @fields[1][1] }
-        expect(@spy.getCall(1).args[0]).to.deep.equal(args)
+    And   -> @classes.includes "card_section-title"
+    Then  -> @subject.querySelectorAll("h1").length == 1
+    Then  -> @subject.querySelector("h1").textContent == "Bla"
 
-  describe "when title is important", -> 
+  describe "when meta", -> 
+    Given -> 
+      testdom "<html><body></body></html>"
+      @type = "meta"
+      @data = [
+        title: "curator",
+        value: "FooBar"
+      ,
+        title: "followers",
+        value: "BarBaz"
+      ]
+      @section = { @type, @data }
+    When  -> @subject  = renderElement @Component, @section
+    Then  -> @classes = @subject.className.split ' '
+    And   -> @classes.includes "card_section"
+    And   -> @classes.includes "card_section-meta"
+    Then  -> @subject.querySelectorAll("h1").length == 0
+    Then  -> @subject.querySelectorAll("p").length == 2
+
+  describe "when other", -> 
     Given -> 
       testdom "<html><body></body></html>"
       @type = "description"
-      @fields = [
-        ["Foo", "Bar"],
-        ["Bar", "Baz"]
-      ]
-      @section = { @type, @fields }
-    When  -> @subject  = renderElement @Component, { @section}
-    Then  -> @subject.querySelector("h1").textContent = "Description"
+      @data = "Qux"
+      @section = { @type, @data }
+    When  -> @subject  = renderElement @Component, @section
+    Then  -> @subject.querySelector("h1").textContent == "Description"
+    Then  -> @subject.querySelectorAll("p").length == 1

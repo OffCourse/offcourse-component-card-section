@@ -1,19 +1,13 @@
 import React, { PropTypes } from "react";
 import R from "ramda";
 import classnames from "classnames";
-import CardField from "offcourse-component-card-field";
+import _ from "lodash";
 
 class CardSection extends React.Component {
 
   constructor(props){
     super(props);
     this.name = "card_section";
-  }
-
-  createFields(fields){
-    return R.map(([key, value]) => {
-      return <CardField key={ key } type={ key } field={ value }/>;
-    }, fields);
   }
 
   classes(type){
@@ -25,23 +19,40 @@ class CardSection extends React.Component {
     });
   }
 
-  render(){
-    const { section } = this.props;
-    const { type, fields } = section;
-    const sectionBlacklist = ["title", "meta"];
-    const isBlacklisted = R.contains(type, sectionBlacklist);
+  selectElement(){
+    const { type, data } = this.props;
+    switch(type){
+      case "title":
+        return <h1>{ data }</h1>;
+      case "meta":
+        return R.map(({title, value }) => (
+          <p key={ title }><span>{ _.capitalize(title) }</span><span>{ value }</span></p>
+        ), data);
+      default:
+        return <p>{ data }</p>;
+    }
+  }
 
+  render(){
+    const { type } = this.props;
+    const titleless = ["title", "meta"];
+    const noTitle = R.contains(type, titleless);
+    const element = this.selectElement();
     return (
       <section className={ this.classes(type) }>
-        { !isBlacklisted && <h1>{ type }</h1> }
-        { this.createFields(fields) }
+        { !noTitle && <h1>{ _.capitalize(type) }</h1> }
+        { element }
       </section>
     );
   }
 }
 
 CardSection.propTypes = {
-  section: PropTypes.object.isRequired
+  type: PropTypes.string.isRequired,
+  field: PropTypes.string,
+  fields: PropTypes.array,
+  collection: PropTypes.object,
+  component: PropTypes.func
 };
 
 export default CardSection;
