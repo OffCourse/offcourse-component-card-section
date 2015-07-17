@@ -20,24 +20,45 @@ class CardSection extends React.Component {
   }
 
   selectElement(){
+    const { component } = this.props;
+    return component ? this.selectCustom() : this.selectDefault();
+  }
+
+  selectCustom(){
+    const { component, data, handlers } = this.props;
+    const Custom = component;
+    return <Custom handlers={ handlers } data={ data } />;
+  }
+
+  selectDefault(){
     const { type, data } = this.props;
+    const { collection } = data;
+
     switch(type){
-      case "title":
-        return <h1>{ data }</h1>;
-      case "meta":
-        return R.map(({title, value }) => (
-          <p key={ title }><span>{ _.capitalize(title) }</span><span>{ value }</span></p>
-        ), data);
-      default:
-        return <p>{ data }</p>;
+      case "title": return <h1>{ data }</h1>;
+      case "meta": return this.metaItems(data);
+      case "list": return <ul>{ this.listItems(collection) }</ul>;
+      default: return <p>{ data }</p>;
     }
   }
 
+  listItems(items){
+    return R.mapIndexed((item, index) => <li key={ index }>{item}</li>, items);
+  }
+
+  metaItems(items){
+    return R.map(({title, value}) => {
+      title = _.capitalize(title);
+      return <p key={ title }><span>{ title }</span><span>{ value }</span></p>;
+    }, items);
+  }
+
   render(){
-    const { type } = this.props;
+    const { type, component } = this.props;
     const titleless = ["title", "meta"];
     const noTitle = R.contains(type, titleless);
     const element = this.selectElement();
+
     return (
       <section className={ this.classes(type) }>
         { !noTitle && <h1>{ _.capitalize(type) }</h1> }
@@ -49,10 +70,9 @@ class CardSection extends React.Component {
 
 CardSection.propTypes = {
   type: PropTypes.string.isRequired,
-  field: PropTypes.string,
-  fields: PropTypes.array,
-  collection: PropTypes.object,
-  component: PropTypes.func
+  data: PropTypes.any.isRequired,
+  component: PropTypes.func,
+  handlers: PropTypes.object
 };
 
 export default CardSection;

@@ -1,6 +1,17 @@
+/*eslint no-undef:0 */
+/*eslint no-alert:0 */
+
 import React from "react";
 import CardSection from "../src/index.jsx";
 import R from "ramda";
+
+class Test extends React.Component {
+  render(){
+    const { data, handlers } = this.props;
+    const { foo } = handlers;
+    return <button onClick={ foo.bind(this, "Goodbye") }>Hello { data }</button>;
+  }
+}
 
 const sectionData = [
   { type: "title", data: "bar" },
@@ -8,7 +19,13 @@ const sectionData = [
     { title: "curator", value: "foobar" },
     { title: "followers", value: 3 }
   ] },
-  { type: "summary", data: "bar" }
+  { type: "list", data: {
+      type: "foo",
+      collection: ["foo", "bar", "baz"]
+    }
+  },
+  { type: "summary", data: "Big World",
+    handlers: { foo(msg) { alert(msg); } }, component: Test }
 ];
 
 class Example extends React.Component {
