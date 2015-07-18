@@ -27,11 +27,11 @@ describe "Card Section Component", ->
         testdom "<html><body></body></html>"
         @type = "meta"
         @data = [
-            title: "curator",
-            value: "FooBar"
+            type: "curator",
+            data: "FooBar"
         ,
-            title: "followers",
-            value: "BarBaz"
+            type: "followers",
+            data: "BarBaz"
         ]
         @section = { @type, @data }
       When  -> @subject  = renderElement @Component, @section
@@ -46,8 +46,8 @@ describe "Card Section Component", ->
         testdom "<html><body></body></html>"
         @type = "list"
         @data = 
-            type: "foo"
-            collection: ["bar", "baz", "bax"]
+            type: "collection"
+            data: ["bar", "baz", "bax"]
         @section = { @type, @data }
       When  -> @subject  = renderElement @Component, @section
       Then  -> @classes = @subject.className.split ' '

@@ -16,12 +16,12 @@ class Test extends React.Component {
 const sectionData = [
   { type: "title", data: "bar" },
   { type: "meta", data: [
-    { title: "curator", value: "foobar" },
-    { title: "followers", value: 3 }
+    { type: "curator", data: "foobar" },
+    { type: "followers", data: 3 }
   ] },
   { type: "list", data: {
-      type: "foo",
-      collection: ["foo", "bar", "baz"]
+      type: "collection",
+      data: ["foo", "bar", "baz"]
     }
   },
   { type: "summary", data: "Big World",

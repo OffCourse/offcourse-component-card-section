@@ -32,7 +32,7 @@ class CardSection extends React.Component {
 
   selectDefault(){
     const { type, data } = this.props;
-    const { collection } = data;
+    const { data: collection } = data;
 
     switch(type){
       case "title": return <h1>{ data }</h1>;
@@ -47,9 +47,9 @@ class CardSection extends React.Component {
   }
 
   metaItems(items){
-    return R.map(({title, value}) => {
-      title = _.capitalize(title);
-      return <p key={ title }><span>{ title }</span><span>{ value }</span></p>;
+    return R.mapIndexed(({type, data}) => {
+      let title = _.capitalize(type);
+      return <p key={ title }><span>{ title }</span>: <span>{ data }</span></p>;
     }, items);
   }
 
