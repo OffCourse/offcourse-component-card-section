@@ -1,6 +1,6 @@
 {
   "name": "offcourse-component-card-section",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "A react component for the offcourse card section",
   "main": "lib/index.js",
   "scripts": {

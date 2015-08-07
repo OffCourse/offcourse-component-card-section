@@ -40,8 +40,8 @@ function Styles({baseUnit = 30}){
       fontSize: fontSize.base,
       fontFamily: normalFont,
       lineHeight: lineHeight.base,
-      paddingLeft: space.one,
-      paddingRight: space.one
+      paddingLeft: space.base,
+      paddingRight: space.base
     },
     smallerBottomMargin: {
       margin: `0 0 ${space.condensed} 0`
