@@ -9,7 +9,7 @@ gulp.task('lint', function () {
 });
 
 gulp.task('babel', function () {
-  return gulp.src('src/index.jsx')
+  return gulp.src(['src/index.jsx', 'src/styles.js'])
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failOnError())

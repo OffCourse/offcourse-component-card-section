@@ -1,6 +1,6 @@
 {
   "name": "offcourse-component-card-section",
-  "version": "0.0.6",
+  "version": "0.3.0",
   "description": "A react component for the offcourse card section",
   "main": "lib/index.js",
   "scripts": {
@@ -17,8 +17,8 @@
   "dependencies": {
     "classnames": "^2.1.2",
     "lodash": "^3.10.0",
-    "offcourse-component-card-field": "0.0.2",
     "offcourse-helpers-card-component": "0.0.3",
+    "radium": "^0.13.7",
     "ramda": "^0.15.1",
     "react": "^0.13.3"
   },
@@ -28,9 +28,10 @@
     "babel-core": "^5.5.6",
     "babel-eslint": "^3.1.14",
     "babel-loader": "^5.1.4",
+    "babel-plugin-object-assign": "^1.2.1",
     "chai": "^3.0.0",
-    "css-loader": "^0.9.1",
     "coffee-script": "^1.9.3",
+    "css-loader": "^0.9.1",
     "eslint": "^0.22.1",
     "eslint-loader": "^0.12.0",
     "eslint-plugin-react": "^2.5.0",
